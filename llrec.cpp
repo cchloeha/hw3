@@ -16,7 +16,7 @@ void llpivot(Node *&head, Node *&smaller, Node *&larger, int pivot) {
   Node* curr = head;
   Node* next = head->next;
 
-  llpviot(next, smaller, larger, pivot);
+  llpivot(next, smaller, larger, pivot);
 
   // Detach curr
   curr->next = NULL;

@@ -86,6 +86,31 @@ int main(int argc, char* argv[])
     print(head);
 
     // Test out your linked list code
+    Node* small = nullptr;
+    Node* large = nullptr;
+
+    // Ex pivot = 8
+    llpivot(head, small, large, 8);
+
+    cout << "Smaller (<= pivot): ";
+    print(small);
+    cout << "Larger (> pivot): ";
+    print(large);
+
+    // Ex test for llfilter
+    struct IsOdd {
+      bool operator()(int x) const {
+        return x % 2 != 0;
+      }
+    };
+
+    Node* filtered = llfilter(small, IsOdd());
+    cout << "Filtered (removed odds from smaller): ";
+    print(filtered);
+
+    // Clean up 
+    dealloc(filtered);
+    dealloc(large);
 
 
 

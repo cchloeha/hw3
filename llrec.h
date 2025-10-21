@@ -83,6 +83,21 @@ Node* llfilter(Node* head, Comp pred)
     //*********************************************
     // Provide your implementation below
     //*********************************************
+    if(head == NULL) return NULL;
+
+    // Recurse on remainder of list
+    Node* kept = llfilter(head->next, pred);
+
+    if(pred(head->val)) {
+      // Remove this node
+      delete head;
+      return kept;
+    }
+    else {
+      // Keep this node and link to filtered remainder
+      head->next = kept;
+      return head;
+    }
 
 
 }

@@ -4,6 +4,7 @@
 
 #include "gate.h"
 #include "wire.h"
+#include "event.h"
 
 Gate::Gate(int num_inputs, Wire* output) 
 	: m_output(output), m_inputs(num_inputs), m_delay(0), m_current_state('X')
@@ -87,4 +88,25 @@ Event* Or2Gate::update(uint64_t current_time)
          
 	}
   return e;
+}
+
+NotGate::NotGate(Wire* in, Wire* o) : Gate(1, o)
+{
+  wireInput(0, in);
+}
+
+Event* NotGate::update(uint64_t current_time)
+{
+  char in = m_inputs[0]->getState();
+  char out;
+  if(in == 'X') out = 'X';
+  else if (in == '0') out = '1';
+  else out = '0';
+
+  if(out != m_current_state) {
+    m_current_state = out;
+    uint64_t next = current_time + m_delay;
+    return new Event{next, m_output, out};
+  }
+  return nullptr;
 }

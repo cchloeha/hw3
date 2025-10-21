@@ -53,18 +53,7 @@ public:
    * 
    * @throw std::underflow_error if the heap is empty
    */
-  void pop()
-  {
-    if(empty()) {
-      throw std::underflow_error("pop() on empty heap");
-    }
-    // Move last to root, remove last, then restore heap
-    std::swap(data_.front(), data_.back());
-    data_.pop_back();
-    if(!data_.empty()) {
-      heapify(0);
-    }
-  }
+  void pop();
 
   /// returns true if the heap is empty
 
